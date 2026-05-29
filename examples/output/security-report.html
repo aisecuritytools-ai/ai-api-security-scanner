@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Security Scan Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; padding: 2rem; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        h1 { margin-bottom: 0.5rem; }
+        .subtitle { color: #666; margin-bottom: 2rem; }
+        .overall-score { text-align: center; padding: 2rem; background: white; border-radius: 8px; margin-bottom: 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .overall-score .score { font-size: 3rem; font-weight: bold; }
+        .overall-score .score.good { color: #22c55e; }
+        .overall-score .score.warning { color: #f59e0b; }
+        .overall-score .score.critical { color: #ef4444; }
+        .scanners { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .scanner-card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .scanner-card .score { font-size: 1.5rem; font-weight: bold; margin: 0.5rem 0; }
+        .scanner-card .score.good { color: #22c55e; }
+        .scanner-card .score.warning { color: #f59e0b; }
+        .scanner-card .score.critical { color: #ef4444; }
+        .findings-section { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .finding { border-left: 4px solid #ccc; padding: 1rem; margin: 1rem 0; background: #fafafa; border-radius: 0 4px 4px 0; }
+        .finding.high { border-color: #ef4444; }
+        .finding.medium { border-color: #f59e0b; }
+        .finding.low { border-color: #3b82f6; }
+        .finding-header { margin-bottom: 0.5rem; }
+        .badge { padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; color: white; }
+        .badge.high { background: #ef4444; }
+        .badge.medium { background: #f59e0b; }
+        .badge.low { background: #3b82f6; }
+        .details { margin-top: 0.5rem; font-size: 0.9rem; color: #555; }
+        .summary { display: flex; gap: 1rem; justify-content: center; margin: 1rem 0; }
+        .summary-item { padding: 0.5rem 1rem; border-radius: 4px; background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>API Security Scan Report</h1>
+        <p class="subtitle">Project: .. | Generated: 2026-05-29T22:05:26.435570+00:00</p>
+
+        <div class="overall-score">
+            <div class="score warning">58/100</div>
+            <p>Overall Security Score</p>
+            <div class="summary">
+                <span class="summary-item">🔴 High: 2</span>
+                <span class="summary-item">🟡 Medium: 5</span>
+                <span class="summary-item">🔵 Low: 2</span>
+            </div>
+        </div>
+
+        <div class="scanners">
+        <div class="scanner-card">
+            <h3>API Security Audit</h3>
+            <div class="score warning">50/100</div>
+            <p>3/6 checks passed | 3 findings</p>
+        </div>
+        <div class="scanner-card">
+            <h3>Code Compliance</h3>
+            <div class="score critical">25/100</div>
+            <p>2/8 checks passed | 6 findings</p>
+        </div>
+        <div class="scanner-card">
+            <h3>Vulnerability Scan</h3>
+            <div class="score good">100/100</div>
+            <p>6/6 checks passed | 0 findings</p>
+        </div></div>
+
+        <div class="findings-section">
+            <h2>Findings (9)</h2>
+            
+        <div class="finding high">
+            <div class="finding-header">
+                <span class="badge high">HIGH</span>
+                <strong>[CC-001] Missing OAuth2/JWT Configuration</strong>
+            </div>
+            <p>No OAuth2 or JWT authentication configuration found. APIs must authenticate requests.</p>
+            <div class="details">
+                <p><strong>Category:</strong> Code Compliance</p>
+                
+                <p><strong>Remediation:</strong> Configure Spring Security OAuth2 Resource Server or implement JWT validation middleware.</p>
+                <p><strong>OWASP:</strong> API2:2023 - Broken Authentication</p>
+                <p><strong>CWE:</strong> CWE-306</p>
+            </div>
+        </div>
+        <div class="finding high">
+            <div class="finding-header">
+                <span class="badge high">HIGH</span>
+                <strong>[CC-002] Missing Authorization Controls</strong>
+            </div>
+            <p>No authorization annotations or middleware found. Endpoints may be accessible without proper access control.</p>
+            <div class="details">
+                <p><strong>Category:</strong> Code Compliance</p>
+                
+                <p><strong>Remediation:</strong> Add @PreAuthorize, @Secured, or @RolesAllowed annotations (Java) or auth middleware (Node.js) to all endpoints.</p>
+                <p><strong>OWASP:</strong> API1:2023 - Broken Object Level Authorization</p>
+                <p><strong>CWE:</strong> CWE-862</p>
+            </div>
+        </div>
+        <div class="finding medium">
+            <div class="finding-header">
+                <span class="badge medium">MEDIUM</span>
+                <strong>[API-004] Missing Input Validation Patterns</strong>
+            </div>
+            <p>No input validation constraints (minLength, maxLength, pattern, @Valid) found in API definitions.</p>
+            <div class="details">
+                <p><strong>Category:</strong> API Security</p>
+                
+                <p><strong>Remediation:</strong> Add validation constraints to all request parameters: minLength, maxLength, pattern, minimum, maximum in OpenAPI spec or @Valid annotations in code.</p>
+                <p><strong>OWASP:</strong> API3:2023 - Broken Object Property Level Authorization</p>
+                <p><strong>CWE:</strong> CWE-20</p>
+            </div>
+        </div>
+        <div class="finding medium">
+            <div class="finding-header">
+                <span class="badge medium">MEDIUM</span>
+                <strong>[API-005] No Rate Limiting Configuration</strong>
+            </div>
+            <p>No rate limiting mechanism detected. APIs without rate limiting are vulnerable to abuse and denial of service.</p>
+            <div class="details">
+                <p><strong>Category:</strong> API Security</p>
+                
+                <p><strong>Remediation:</strong> Implement rate limiting using Bucket4j (Java), express-rate-limit (Node.js), or API Gateway throttling. Configure per-user and per-IP limits.</p>
+                <p><strong>OWASP:</strong> API4:2023 - Unrestricted Resource Consumption</p>
+                <p><strong>CWE:</strong> CWE-770</p>
+            </div>
+        </div>
+        <div class="finding medium">
+            <div class="finding-header">
+                <span class="badge medium">MEDIUM</span>
+                <strong>[CC-003] Missing Input Validation</strong>
+            </div>
+            <p>No input validation annotations or middleware detected. User input must be validated before processing.</p>
+            <div class="details">
+                <p><strong>Category:</strong> Code Compliance</p>
+                
+                <p><strong>Remediation:</strong> Add @Valid, @Pattern, @Size annotations (Java) or Joi/Zod validation schemas (Node.js) to all request handlers.</p>
+                <p><strong>OWASP:</strong> API3:2023 - Broken Object Property Level Authorization</p>
+                <p><strong>CWE:</strong> CWE-20</p>
+            </div>
+        </div>
+        <div class="finding medium">
+            <div class="finding-header">
+                <span class="badge medium">MEDIUM</span>
+                <strong>[CC-006] Missing CORS Configuration</strong>
+            </div>
+            <p>No CORS configuration found. Without explicit CORS policy, browsers may block legitimate requests or allow unauthorized origins.</p>
+            <div class="details">
+                <p><strong>Category:</strong> Code Compliance</p>
+                
+                <p><strong>Remediation:</strong> Configure explicit CORS origins (never use '*' in production). Set allowed methods, headers, and credentials policy.</p>
+                <p><strong>OWASP:</strong> API8:2023 - Security Misconfiguration</p>
+                <p><strong>CWE:</strong> CWE-942</p>
+            </div>
+        </div>
+        <div class="finding medium">
+            <div class="finding-header">
+                <span class="badge medium">MEDIUM</span>
+                <strong>[CC-007] Missing Global Error Handler</strong>
+            </div>
+            <p>No global exception handler found. Unhandled errors may leak stack traces and internal details to clients.</p>
+            <div class="details">
+                <p><strong>Category:</strong> Code Compliance</p>
+                
+                <p><strong>Remediation:</strong> Implement @ControllerAdvice (Java) or global error middleware (Node.js) that returns sanitized error responses.</p>
+                <p><strong>OWASP:</strong> API8:2023 - Security Misconfiguration</p>
+                <p><strong>CWE:</strong> CWE-209</p>
+            </div>
+        </div>
+        <div class="finding low">
+            <div class="finding-header">
+                <span class="badge low">LOW</span>
+                <strong>[API-006] Missing API Versioning Strategy</strong>
+            </div>
+            <p>No API versioning pattern detected (/v1/, /v2/, version headers). Versioning enables safe deprecation of insecure endpoints.</p>
+            <div class="details">
+                <p><strong>Category:</strong> API Security</p>
+                
+                <p><strong>Remediation:</strong> Implement URL-based versioning (/api/v1/) or header-based versioning (Accept: application/vnd.api.v1+json).</p>
+                <p><strong>OWASP:</strong> API9:2023 - Improper Inventory Management</p>
+                
+            </div>
+        </div>
+        <div class="finding low">
+            <div class="finding-header">
+                <span class="badge low">LOW</span>
+                <strong>[CC-008] Missing Security Logging</strong>
+            </div>
+            <p>No security event logging configuration found. Security events must be logged for audit and incident response.</p>
+            <div class="details">
+                <p><strong>Category:</strong> Code Compliance</p>
+                
+                <p><strong>Remediation:</strong> Configure structured logging for authentication events, authorization failures, and input validation errors.</p>
+                <p><strong>OWASP:</strong> API9:2023 - Improper Inventory Management</p>
+                <p><strong>CWE:</strong> CWE-778</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

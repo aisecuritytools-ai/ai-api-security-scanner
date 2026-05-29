@@ -1,0 +1,101 @@
+<?xml version="1.0" ?>
+<testsuites name="API Security Scan" tests="9" failures="2">
+  <testsuite name="API Security Audit" tests="6" failures="3">
+    <testcase name="API Security Audit - Check 1" classname="API Security Audit"/>
+    <testcase name="API Security Audit - Check 2" classname="API Security Audit"/>
+    <testcase name="API Security Audit - Check 3" classname="API Security Audit"/>
+    <testcase name="[API-004] Missing Input Validation Patterns" classname="API Security">
+      <error message="Missing Input Validation Patterns" type="MEDIUM">No input validation constraints (minLength, maxLength, pattern, @Valid) found in API definitions.
+
+Severity: MEDIUM
+File: N/A
+Remediation: Add validation constraints to all request parameters: minLength, maxLength, pattern, minimum, maximum in OpenAPI spec or @Valid annotations in code.
+OWASP: API3:2023 - Broken Object Property Level Authorization
+CWE: CWE-20</error>
+    </testcase>
+    <testcase name="[API-005] No Rate Limiting Configuration" classname="API Security">
+      <error message="No Rate Limiting Configuration" type="MEDIUM">No rate limiting mechanism detected. APIs without rate limiting are vulnerable to abuse and denial of service.
+
+Severity: MEDIUM
+File: N/A
+Remediation: Implement rate limiting using Bucket4j (Java), express-rate-limit (Node.js), or API Gateway throttling. Configure per-user and per-IP limits.
+OWASP: API4:2023 - Unrestricted Resource Consumption
+CWE: CWE-770</error>
+    </testcase>
+    <testcase name="[API-006] Missing API Versioning Strategy" classname="API Security">
+      <error message="Missing API Versioning Strategy" type="LOW">No API versioning pattern detected (/v1/, /v2/, version headers). Versioning enables safe deprecation of insecure endpoints.
+
+Severity: LOW
+File: N/A
+Remediation: Implement URL-based versioning (/api/v1/) or header-based versioning (Accept: application/vnd.api.v1+json).
+OWASP: API9:2023 - Improper Inventory Management
+CWE: N/A</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="Code Compliance" tests="8" failures="6">
+    <testcase name="Code Compliance - Check 1" classname="Code Compliance"/>
+    <testcase name="Code Compliance - Check 2" classname="Code Compliance"/>
+    <testcase name="[CC-001] Missing OAuth2/JWT Configuration" classname="Code Compliance">
+      <failure message="Missing OAuth2/JWT Configuration" type="HIGH">No OAuth2 or JWT authentication configuration found. APIs must authenticate requests.
+
+Severity: HIGH
+File: N/A
+Remediation: Configure Spring Security OAuth2 Resource Server or implement JWT validation middleware.
+OWASP: API2:2023 - Broken Authentication
+CWE: CWE-306</failure>
+    </testcase>
+    <testcase name="[CC-002] Missing Authorization Controls" classname="Code Compliance">
+      <failure message="Missing Authorization Controls" type="HIGH">No authorization annotations or middleware found. Endpoints may be accessible without proper access control.
+
+Severity: HIGH
+File: N/A
+Remediation: Add @PreAuthorize, @Secured, or @RolesAllowed annotations (Java) or auth middleware (Node.js) to all endpoints.
+OWASP: API1:2023 - Broken Object Level Authorization
+CWE: CWE-862</failure>
+    </testcase>
+    <testcase name="[CC-003] Missing Input Validation" classname="Code Compliance">
+      <error message="Missing Input Validation" type="MEDIUM">No input validation annotations or middleware detected. User input must be validated before processing.
+
+Severity: MEDIUM
+File: N/A
+Remediation: Add @Valid, @Pattern, @Size annotations (Java) or Joi/Zod validation schemas (Node.js) to all request handlers.
+OWASP: API3:2023 - Broken Object Property Level Authorization
+CWE: CWE-20</error>
+    </testcase>
+    <testcase name="[CC-006] Missing CORS Configuration" classname="Code Compliance">
+      <error message="Missing CORS Configuration" type="MEDIUM">No CORS configuration found. Without explicit CORS policy, browsers may block legitimate requests or allow unauthorized origins.
+
+Severity: MEDIUM
+File: N/A
+Remediation: Configure explicit CORS origins (never use '*' in production). Set allowed methods, headers, and credentials policy.
+OWASP: API8:2023 - Security Misconfiguration
+CWE: CWE-942</error>
+    </testcase>
+    <testcase name="[CC-007] Missing Global Error Handler" classname="Code Compliance">
+      <error message="Missing Global Error Handler" type="MEDIUM">No global exception handler found. Unhandled errors may leak stack traces and internal details to clients.
+
+Severity: MEDIUM
+File: N/A
+Remediation: Implement @ControllerAdvice (Java) or global error middleware (Node.js) that returns sanitized error responses.
+OWASP: API8:2023 - Security Misconfiguration
+CWE: CWE-209</error>
+    </testcase>
+    <testcase name="[CC-008] Missing Security Logging" classname="Code Compliance">
+      <error message="Missing Security Logging" type="LOW">No security event logging configuration found. Security events must be logged for audit and incident response.
+
+Severity: LOW
+File: N/A
+Remediation: Configure structured logging for authentication events, authorization failures, and input validation errors.
+OWASP: API9:2023 - Improper Inventory Management
+CWE: CWE-778</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="Vulnerability Scan" tests="6" failures="0">
+    <testcase name="Vulnerability Scan - Check 1" classname="Vulnerability Scan"/>
+    <testcase name="Vulnerability Scan - Check 2" classname="Vulnerability Scan"/>
+    <testcase name="Vulnerability Scan - Check 3" classname="Vulnerability Scan"/>
+    <testcase name="Vulnerability Scan - Check 4" classname="Vulnerability Scan"/>
+    <testcase name="Vulnerability Scan - Check 5" classname="Vulnerability Scan"/>
+    <testcase name="Vulnerability Scan - Check 6" classname="Vulnerability Scan"/>
+  </testsuite>
+</testsuites>

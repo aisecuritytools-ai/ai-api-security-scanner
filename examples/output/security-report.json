@@ -1,0 +1,139 @@
+{
+  "project_path": "..",
+  "overall_score": 58,
+  "scanner_results": [
+    {
+      "name": "API Security Audit",
+      "score": 50,
+      "findings": [
+        {
+          "rule_id": "API-004",
+          "title": "Missing Input Validation Patterns",
+          "description": "No input validation constraints (minLength, maxLength, pattern, @Valid) found in API definitions.",
+          "severity": "MEDIUM",
+          "category": "API Security",
+          "file_path": null,
+          "line_number": null,
+          "remediation": "Add validation constraints to all request parameters: minLength, maxLength, pattern, minimum, maximum in OpenAPI spec or @Valid annotations in code.",
+          "owasp_ref": "API3:2023 - Broken Object Property Level Authorization",
+          "cwe_id": "CWE-20"
+        },
+        {
+          "rule_id": "API-005",
+          "title": "No Rate Limiting Configuration",
+          "description": "No rate limiting mechanism detected. APIs without rate limiting are vulnerable to abuse and denial of service.",
+          "severity": "MEDIUM",
+          "category": "API Security",
+          "file_path": null,
+          "line_number": null,
+          "remediation": "Implement rate limiting using Bucket4j (Java), express-rate-limit (Node.js), or API Gateway throttling. Configure per-user and per-IP limits.",
+          "owasp_ref": "API4:2023 - Unrestricted Resource Consumption",
+          "cwe_id": "CWE-770"
+        },
+        {
+          "rule_id": "API-006",
+          "title": "Missing API Versioning Strategy",
+          "description": "No API versioning pattern detected (/v1/, /v2/, version headers). Versioning enables safe deprecation of insecure endpoints.",
+          "severity": "LOW",
+          "category": "API Security",
+          "file_path": null,
+          "line_number": null,
+          "remediation": "Implement URL-based versioning (/api/v1/) or header-based versioning (Accept: application/vnd.api.v1+json).",
+          "owasp_ref": "API9:2023 - Improper Inventory Management",
+          "cwe_id": null
+        }
+      ],
+      "checks_passed": 3,
+      "checks_total": 6
+    },
+    {
+      "name": "Code Compliance",
+      "score": 25,
+      "findings": [
+        {
+          "rule_id": "CC-001",
+          "title": "Missing OAuth2/JWT Configuration",
+          "description": "No OAuth2 or JWT authentication configuration found. APIs must authenticate requests.",
+          "severity": "HIGH",
+          "category": "Code Compliance",
+          "file_path": null,
+          "line_number": null,
+          "remediation": "Configure Spring Security OAuth2 Resource Server or implement JWT validation middleware.",
+          "owasp_ref": "API2:2023 - Broken Authentication",
+          "cwe_id": "CWE-306"
+        },
+        {
+          "rule_id": "CC-002",
+          "title": "Missing Authorization Controls",
+          "description": "No authorization annotations or middleware found. Endpoints may be accessible without proper access control.",
+          "severity": "HIGH",
+          "category": "Code Compliance",
+          "file_path": null,
+          "line_number": null,
+          "remediation": "Add @PreAuthorize, @Secured, or @RolesAllowed annotations (Java) or auth middleware (Node.js) to all endpoints.",
+          "owasp_ref": "API1:2023 - Broken Object Level Authorization",
+          "cwe_id": "CWE-862"
+        },
+        {
+          "rule_id": "CC-003",
+          "title": "Missing Input Validation",
+          "description": "No input validation annotations or middleware detected. User input must be validated before processing.",
+          "severity": "MEDIUM",
+          "category": "Code Compliance",
+          "file_path": null,
+          "line_number": null,
+          "remediation": "Add @Valid, @Pattern, @Size annotations (Java) or Joi/Zod validation schemas (Node.js) to all request handlers.",
+          "owasp_ref": "API3:2023 - Broken Object Property Level Authorization",
+          "cwe_id": "CWE-20"
+        },
+        {
+          "rule_id": "CC-006",
+          "title": "Missing CORS Configuration",
+          "description": "No CORS configuration found. Without explicit CORS policy, browsers may block legitimate requests or allow unauthorized origins.",
+          "severity": "MEDIUM",
+          "category": "Code Compliance",
+          "file_path": null,
+          "line_number": null,
+          "remediation": "Configure explicit CORS origins (never use '*' in production). Set allowed methods, headers, and credentials policy.",
+          "owasp_ref": "API8:2023 - Security Misconfiguration",
+          "cwe_id": "CWE-942"
+        },
+        {
+          "rule_id": "CC-007",
+          "title": "Missing Global Error Handler",
+          "description": "No global exception handler found. Unhandled errors may leak stack traces and internal details to clients.",
+          "severity": "MEDIUM",
+          "category": "Code Compliance",
+          "file_path": null,
+          "line_number": null,
+          "remediation": "Implement @ControllerAdvice (Java) or global error middleware (Node.js) that returns sanitized error responses.",
+          "owasp_ref": "API8:2023 - Security Misconfiguration",
+          "cwe_id": "CWE-209"
+        },
+        {
+          "rule_id": "CC-008",
+          "title": "Missing Security Logging",
+          "description": "No security event logging configuration found. Security events must be logged for audit and incident response.",
+          "severity": "LOW",
+          "category": "Code Compliance",
+          "file_path": null,
+          "line_number": null,
+          "remediation": "Configure structured logging for authentication events, authorization failures, and input validation errors.",
+          "owasp_ref": "API9:2023 - Improper Inventory Management",
+          "cwe_id": "CWE-778"
+        }
+      ],
+      "checks_passed": 2,
+      "checks_total": 8
+    },
+    {
+      "name": "Vulnerability Scan",
+      "score": 100,
+      "findings": [],
+      "checks_passed": 6,
+      "checks_total": 6
+    }
+  ],
+  "timestamp": "2026-05-29T22:05:26.435570+00:00",
+  "version": "1.0.0"
+}
